@@ -1,8 +1,44 @@
 <!DOCTYPE html>
-<html>
-  <body>
-    <script type="text/javascript" src="./script.js">
-</script>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sharable URL Generator</title>
+</head>
+<body>
+  <h2>Sharable URLs</h2>
+  <p>We can share a lot of information through the URLs</p>
 
+  <form id="infoForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name"><br><br>
+
+    <label for="year">Year:</label>
+    <input type="number" id="year" name="year"><br><br>
+
+    <button type="button" id="button">Submit</button>
+  </form>
+
+  <h3 id="url">https://localhost:8080/</h3>
+
+  <script>
+    document.getElementById("button").addEventListener("click", function () {
+      const baseUrl = "https://localhost:8080/";
+      const name = document.getElementById("name").value.trim();
+      const year = document.getElementById("year").value.trim();
+
+      let query = [];
+
+      if (name) {
+        query.push(`name=${encodeURIComponent(name)}`);
+      }
+      if (year) {
+        query.push(`year=${encodeURIComponent(year)}`);
+      }
+
+      const fullUrl = query.length ? `${baseUrl}?${query.join("&")}` : baseUrl;
+      document.getElementById("url").textContent = fullUrl;
+    });
+  </script>
+</body>
 </html>
